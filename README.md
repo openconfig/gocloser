@@ -40,15 +40,15 @@ func f() (rerr error) {
 
 The deferred `closer.Close` ensures:
 
-1.  That `closeFn` is called regardless of the outcome of `useResource` --
-    whether it returns normally, with an error, or raises a panic.
-1.  If both `useResource` and `closeFn` return errors, `f` returns the same
-    error as `useResource` and the error returned by `closeFn` is logged.
-1.  If `closeFn` returns an error but `useResource` does not, `f` returns the
-    same error as `closeFn`.
+1. That `closeFn` is called regardless of the outcome of `useResource` --
+   whether it returns normally, with an error, or raises a panic.
+1. If both `useResource` and `closeFn` return errors, `f` returns the same error
+   as `useResource` and the error returned by `closeFn` is logged.
+1. If `closeFn` returns an error but `useResource` does not, `f` returns the
+   same error as `closeFn`.
 
 There are cases in which that last property may not be desirable. That is, you
-may *not* want to return the error produced by `closeFn` even when `useResource`
+may _not_ want to return the error produced by `closeFn` even when `useResource`
 has returned normally. Perhaps you agree
 with the argument
 that returning an error on close should only be done when writing to a resource,
@@ -69,7 +69,7 @@ func f() error {
 
 ## Ensuring a resource is closed only when there's a subsequent error
 
-Sometimes a function intends to leave a resource *open* when it returns normally
+Sometimes a function intends to leave a resource _open_ when it returns normally
 but wishes to close it in the case it returns an error. For such cases, use
 `closer.CloseOnErr` or `closer.CloseVoidOnErr`. An example:
 
